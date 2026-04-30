@@ -1,0 +1,1528 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Retail Profit Leak Audit™ — The Profitable Retail System</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Syne:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --black: #090906;
+    --deep: #111108;
+    --card: #18180F;
+    --card2: #1E1E13;
+    --border: #2C2C1A;
+    --gold: #D4A832;
+    --gold-light: #ECC85A;
+    --gold-dim: rgba(212,168,50,0.10);
+    --gold-pale: #F5E8B4;
+    --white: #F5F2E8;
+    --off: #C0B890;
+    --muted: #6A6448;
+    --red: #C04030;
+    --red-dim: rgba(192,64,48,0.12);
+    --orange: #D06820;
+    --orange-dim: rgba(208,104,32,0.12);
+    --green: #2A7A48;
+    --green-light: #3DAA68;
+    --green-dim: rgba(42,122,72,0.12);
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--black);
+    color: var(--white);
+    font-family: 'Syne', sans-serif;
+    font-size: 15px;
+    line-height: 1.65;
+    min-height: 100vh;
+  }
+
+  /* HEADER */
+  header {
+    background: var(--deep);
+    border-bottom: 1px solid var(--border);
+    padding: 18px 32px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .brand {
+    font-family: 'Fraunces', serif;
+    font-size: 14px;
+    font-weight: 900;
+    color: var(--gold);
+    letter-spacing: 0.02em;
+  }
+
+  .brand span { color: var(--white); font-weight: 400; font-style: italic; font-size: 13px; }
+
+  .header-tag {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  /* HERO */
+  .hero {
+    text-align: center;
+    padding: 72px 24px 56px;
+    background: radial-gradient(ellipse 80% 50% at 50% 0%, #1e1500 0%, transparent 70%);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .hero-pill {
+    display: inline-block;
+    border: 1px solid rgba(212,168,50,0.3);
+    background: var(--gold-dim);
+    color: var(--gold);
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    padding: 6px 18px;
+    margin-bottom: 28px;
+  }
+
+  .hero h1 {
+    font-family: 'Fraunces', serif;
+    font-size: clamp(34px, 5vw, 64px);
+    font-weight: 900;
+    line-height: 1.0;
+    letter-spacing: -0.02em;
+    margin-bottom: 16px;
+  }
+
+  .hero h1 em { font-style: italic; color: var(--gold); }
+
+  .hero-sub {
+    font-size: 17px;
+    font-weight: 400;
+    color: var(--off);
+    max-width: 520px;
+    margin: 0 auto 36px;
+    line-height: 1.6;
+  }
+
+  .hero-meta {
+    display: flex;
+    gap: 32px;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .meta-item {
+    font-size: 12px;
+    color: var(--muted);
+    font-weight: 600;
+    letter-spacing: 0.05em;
+  }
+
+  .meta-item span { color: var(--gold); }
+
+  /* PROGRESS BAR */
+  .progress-wrap {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    background: var(--deep);
+    border-bottom: 1px solid var(--border);
+    padding: 12px 32px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+
+  .progress-label {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--muted);
+    white-space: nowrap;
+    min-width: 80px;
+  }
+
+  .progress-bar-outer {
+    flex: 1;
+    height: 4px;
+    background: var(--border);
+    border-radius: 2px;
+    overflow: hidden;
+  }
+
+  .progress-bar-inner {
+    height: 100%;
+    background: var(--gold);
+    border-radius: 2px;
+    transition: width 0.4s ease;
+    width: 0%;
+  }
+
+  .progress-count {
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--gold);
+    white-space: nowrap;
+    min-width: 48px;
+    text-align: right;
+  }
+
+  /* MAIN LAYOUT */
+  .audit-wrap {
+    max-width: 820px;
+    margin: 0 auto;
+    padding: 0 24px 80px;
+  }
+
+  /* CATEGORY */
+  .category {
+    margin-top: 56px;
+  }
+
+  .cat-header {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 24px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .cat-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    flex-shrink: 0;
+    background: var(--gold-dim);
+    border: 1px solid rgba(212,168,50,0.2);
+  }
+
+  .cat-info { flex: 1; }
+
+  .cat-num {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 2px;
+  }
+
+  .cat-name {
+    font-family: 'Fraunces', serif;
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--white);
+    line-height: 1.1;
+  }
+
+  .cat-desc {
+    font-size: 13px;
+    color: var(--muted);
+    margin-top: 2px;
+  }
+
+  /* QUESTION */
+  .question {
+    background: var(--card);
+    border: 1px solid var(--border);
+    padding: 24px 28px;
+    margin-bottom: 3px;
+    transition: border-color 0.2s;
+  }
+
+  .question.answered { border-color: rgba(212,168,50,0.25); }
+
+  .q-header {
+    display: flex;
+    gap: 14px;
+    align-items: flex-start;
+    margin-bottom: 16px;
+  }
+
+  .q-num {
+    font-family: 'Fraunces', serif;
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--gold);
+    opacity: 0.5;
+    min-width: 28px;
+    margin-top: 1px;
+  }
+
+  .q-text {
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--white);
+    line-height: 1.45;
+    flex: 1;
+  }
+
+  .q-text .leak-tag {
+    display: inline-block;
+    background: var(--red-dim);
+    color: var(--red);
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    padding: 2px 8px;
+    margin-left: 8px;
+    vertical-align: middle;
+  }
+
+  /* OPTIONS */
+  .options {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    padding-left: 42px;
+  }
+
+  .option {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 12px 16px;
+    background: var(--card2);
+    border: 1px solid var(--border);
+    cursor: pointer;
+    transition: all 0.15s;
+    border-radius: 0;
+    position: relative;
+  }
+
+  .option:hover {
+    background: #242418;
+    border-color: var(--gold);
+  }
+
+  .option.selected-bad {
+    background: var(--red-dim);
+    border-color: var(--red);
+  }
+
+  .option.selected-ok {
+    background: var(--orange-dim);
+    border-color: var(--orange);
+  }
+
+  .option.selected-good {
+    background: var(--green-dim);
+    border-color: var(--green);
+  }
+
+  .option-radio {
+    width: 16px;
+    height: 16px;
+    border: 2px solid var(--border);
+    border-radius: 50%;
+    flex-shrink: 0;
+    margin-top: 2px;
+    transition: all 0.15s;
+    position: relative;
+  }
+
+  .option.selected-bad .option-radio { border-color: var(--red); background: var(--red); }
+  .option.selected-ok .option-radio { border-color: var(--orange); background: var(--orange); }
+  .option.selected-good .option-radio { border-color: var(--green); background: var(--green); }
+
+  .option-radio::after {
+    content: '';
+    position: absolute;
+    inset: 3px;
+    background: white;
+    border-radius: 50%;
+    opacity: 0;
+    transition: opacity 0.15s;
+  }
+
+  .option.selected-bad .option-radio::after,
+  .option.selected-ok .option-radio::after,
+  .option.selected-good .option-radio::after { opacity: 1; }
+
+  .option-label {
+    font-size: 13px;
+    color: var(--off);
+    line-height: 1.5;
+    flex: 1;
+  }
+
+  .option.selected-bad .option-label { color: var(--white); }
+  .option.selected-ok .option-label { color: var(--white); }
+  .option.selected-good .option-label { color: var(--white); }
+
+  .option-score-badge {
+    font-size: 10px;
+    font-weight: 700;
+    padding: 2px 8px;
+    border-radius: 0;
+    white-space: nowrap;
+    opacity: 0;
+    transition: opacity 0.2s;
+  }
+
+  .option.selected-bad .option-score-badge,
+  .option.selected-ok .option-score-badge,
+  .option.selected-good .option-score-badge { opacity: 1; }
+
+  .badge-bad { background: var(--red-dim); color: var(--red); border: 1px solid var(--red); }
+  .badge-ok { background: var(--orange-dim); color: var(--orange); border: 1px solid var(--orange); }
+  .badge-good { background: var(--green-dim); color: var(--green-light); border: 1px solid var(--green); }
+
+  /* SUBMIT */
+  .submit-section {
+    margin-top: 56px;
+    padding: 40px;
+    background: var(--card);
+    border: 1px solid var(--border);
+    text-align: center;
+  }
+
+  .submit-section h3 {
+    font-family: 'Fraunces', serif;
+    font-size: 24px;
+    font-weight: 700;
+    margin-bottom: 8px;
+  }
+
+  .submit-section p {
+    font-size: 14px;
+    color: var(--muted);
+    margin-bottom: 28px;
+    max-width: 440px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .email-row {
+    display: flex;
+    gap: 0;
+    max-width: 460px;
+    margin: 0 auto 12px;
+  }
+
+  .email-input {
+    flex: 1;
+    background: var(--deep);
+    border: 1px solid var(--border);
+    border-right: none;
+    color: var(--white);
+    font-family: 'Syne', sans-serif;
+    font-size: 14px;
+    padding: 14px 18px;
+    outline: none;
+    transition: border-color 0.2s;
+  }
+
+  .email-input:focus { border-color: var(--gold); }
+  .email-input::placeholder { color: var(--muted); }
+
+  .name-input {
+    width: 100%;
+    max-width: 460px;
+    background: var(--deep);
+    border: 1px solid var(--border);
+    color: var(--white);
+    font-family: 'Syne', sans-serif;
+    font-size: 14px;
+    padding: 14px 18px;
+    outline: none;
+    transition: border-color 0.2s;
+    margin: 0 auto 0;
+    display: block;
+  }
+
+  .name-input:focus { border-color: var(--gold); }
+  .name-input::placeholder { color: var(--muted); }
+
+  .submit-btn {
+    background: var(--gold);
+    color: var(--black);
+    border: none;
+    font-family: 'Syne', sans-serif;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    padding: 14px 32px;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.15s;
+    white-space: nowrap;
+  }
+
+  .submit-btn:hover:not(:disabled) {
+    background: var(--gold-light);
+    transform: translateY(-1px);
+  }
+
+  .submit-btn:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+  }
+
+  .incomplete-note {
+    font-size: 12px;
+    color: var(--muted);
+    margin-top: 8px;
+  }
+
+  .incomplete-note span { color: var(--gold); font-weight: 700; }
+
+  /* RESULTS */
+  #results {
+    display: none;
+    max-width: 820px;
+    margin: 0 auto;
+    padding: 56px 24px 80px;
+  }
+
+  .result-hero {
+    text-align: center;
+    padding: 56px 32px;
+    background: var(--card);
+    border: 1px solid var(--border);
+    margin-bottom: 3px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .result-hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse 60% 40% at 50% 0%, rgba(212,168,50,0.06) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .score-ring {
+    width: 140px;
+    height: 140px;
+    margin: 0 auto 28px;
+    position: relative;
+  }
+
+  .score-ring svg {
+    transform: rotate(-90deg);
+    width: 140px;
+    height: 140px;
+  }
+
+  .score-ring-bg {
+    fill: none;
+    stroke: var(--border);
+    stroke-width: 8;
+  }
+
+  .score-ring-fill {
+    fill: none;
+    stroke-width: 8;
+    stroke-linecap: butt;
+    transition: stroke-dashoffset 1.2s ease;
+  }
+
+  .score-center {
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+  }
+
+  .score-num {
+    font-family: 'Fraunces', serif;
+    font-size: 36px;
+    font-weight: 900;
+    line-height: 1;
+  }
+
+  .score-denom {
+    font-size: 12px;
+    color: var(--muted);
+    font-weight: 600;
+  }
+
+  .result-tier-label {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+  }
+
+  .result-title {
+    font-family: 'Fraunces', serif;
+    font-size: clamp(24px, 4vw, 38px);
+    font-weight: 900;
+    margin-bottom: 12px;
+    line-height: 1.1;
+  }
+
+  .result-desc {
+    font-size: 16px;
+    color: var(--off);
+    max-width: 500px;
+    margin: 0 auto 0;
+    line-height: 1.6;
+  }
+
+  /* CATEGORY BREAKDOWN */
+  .breakdown-title {
+    font-family: 'Fraunces', serif;
+    font-size: 22px;
+    font-weight: 700;
+    margin: 48px 0 20px;
+    color: var(--white);
+  }
+
+  .cat-result {
+    background: var(--card);
+    border: 1px solid var(--border);
+    padding: 20px 24px;
+    margin-bottom: 3px;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 16px;
+    align-items: center;
+  }
+
+  .cat-result-name {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--white);
+    margin-bottom: 6px;
+  }
+
+  .cat-result-bar-outer {
+    width: 100%;
+    height: 6px;
+    background: var(--border);
+    border-radius: 3px;
+    overflow: hidden;
+  }
+
+  .cat-result-bar {
+    height: 100%;
+    border-radius: 3px;
+    transition: width 1s ease 0.3s;
+  }
+
+  .bar-red { background: var(--red); }
+  .bar-orange { background: var(--orange); }
+  .bar-green { background: var(--green-light); }
+
+  .cat-result-score {
+    font-family: 'Fraunces', serif;
+    font-size: 20px;
+    font-weight: 900;
+    text-align: right;
+    white-space: nowrap;
+  }
+
+  .cat-result-label {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    text-align: right;
+  }
+
+  /* TOP LEAKS */
+  .leaks-title {
+    font-family: 'Fraunces', serif;
+    font-size: 22px;
+    font-weight: 700;
+    margin: 40px 0 20px;
+    color: var(--white);
+  }
+
+  .leak-item {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-left: 3px solid var(--red);
+    padding: 18px 24px;
+    margin-bottom: 3px;
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 16px;
+    align-items: flex-start;
+  }
+
+  .leak-num {
+    font-family: 'Fraunces', serif;
+    font-size: 22px;
+    font-weight: 900;
+    color: var(--red);
+    line-height: 1;
+  }
+
+  .leak-content h4 {
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--white);
+    margin-bottom: 4px;
+  }
+
+  .leak-content p {
+    font-size: 13px;
+    color: var(--muted);
+    line-height: 1.5;
+  }
+
+  /* CTA */
+  .result-cta {
+    background: var(--card);
+    border: 1px solid var(--gold);
+    padding: 48px 40px;
+    text-align: center;
+    margin-top: 40px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .result-cta::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse 60% 50% at 50% 100%, rgba(212,168,50,0.05) 0%, transparent 70%);
+  }
+
+  .result-cta h3 {
+    font-family: 'Fraunces', serif;
+    font-size: 28px;
+    font-weight: 900;
+    margin-bottom: 12px;
+    position: relative;
+  }
+
+  .result-cta h3 em { font-style: italic; color: var(--gold); }
+
+  .result-cta p {
+    font-size: 15px;
+    color: var(--off);
+    max-width: 480px;
+    margin: 0 auto 32px;
+    line-height: 1.6;
+    position: relative;
+  }
+
+  .cta-btn {
+    display: inline-block;
+    background: var(--gold);
+    color: var(--black);
+    font-family: 'Syne', sans-serif;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    padding: 16px 40px;
+    cursor: pointer;
+    border: none;
+    transition: background 0.2s, transform 0.15s;
+    text-decoration: none;
+    position: relative;
+  }
+
+  .cta-btn:hover { background: var(--gold-light); transform: translateY(-2px); }
+
+  .cta-note {
+    font-size: 12px;
+    color: var(--muted);
+    margin-top: 16px;
+    position: relative;
+  }
+
+  /* ANIMATIONS */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(16px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  .animate-in { animation: fadeUp 0.5s both; }
+
+  @media (max-width: 600px) {
+    header { padding: 14px 20px; }
+    .hero { padding: 48px 20px 40px; }
+    .progress-wrap { padding: 10px 20px; }
+    .audit-wrap { padding: 0 16px 60px; }
+    .question { padding: 18px 20px; }
+    .options { padding-left: 0; }
+    .email-row { flex-direction: column; }
+    .email-input { border-right: 1px solid var(--border); border-bottom: none; }
+    .submit-section { padding: 28px 20px; }
+    #results { padding: 40px 16px 60px; }
+  }
+
+  /* ROUTING SCREEN */
+  #routingScreen {
+    max-width: 680px;
+    margin: 0 auto;
+    padding: 48px 24px 80px;
+  }
+  .routing-hero {
+    text-align: center;
+    margin-bottom: 40px;
+  }
+  .routing-hero h2 {
+    font-family: 'Fraunces', serif;
+    font-size: clamp(24px, 4vw, 40px);
+    font-weight: 900;
+    color: var(--white);
+    line-height: 1.1;
+    margin-bottom: 10px;
+  }
+  .routing-hero h2 em { font-style: italic; color: var(--gold); }
+  .routing-hero p { font-size: 15px; color: var(--muted); line-height: 1.6; }
+  .routing-options {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 32px;
+  }
+  .routing-option {
+    background: var(--card);
+    border: 2px solid var(--border);
+    padding: 22px 24px;
+    cursor: pointer;
+    transition: all 0.2s;
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+  }
+  .routing-option:hover { border-color: var(--gold); background: var(--card2); }
+  .routing-option .ro-icon { font-size: 28px; flex-shrink: 0; margin-top: 2px; }
+  .routing-option .ro-title {
+    font-family: 'Fraunces', serif;
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--white);
+    margin-bottom: 4px;
+  }
+  .routing-option .ro-desc { font-size: 13px; color: var(--muted); line-height: 1.5; }
+  .routing-badge {
+    display: inline-block;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    padding: 3px 10px;
+    margin-top: 8px;
+  }
+  .routing-badge.green { background: var(--green-dim); color: var(--green-light); }
+  .routing-badge.teal  { background: rgba(42,144,128,0.12); color: #3ABAA8; }
+
+</style>
+</head>
+<body>
+
+<header>
+  <div class="brand">The Profitable Retail System<span>™</span></div>
+  <div class="header-tag">Free Audit Tool</div>
+</header>
+
+<div class="hero">
+  <div class="hero-pill">Free Business Diagnostic</div>
+  <h1>The Retail<br><em>Profit Leak Audit™</em></h1>
+  <p class="hero-sub">Answer 12 questions. Get your personalised profit leak score and discover exactly where your clothing retail business is silently losing money.</p>
+  <div class="hero-meta">
+    <div class="meta-item"><span>12</span> Questions</div>
+    <div class="meta-item"><span>6</span> Business Areas</div>
+    <div class="meta-item"><span>~4 mins</span> to complete</div>
+    <div class="meta-item"><span>Instant</span> Score & Report</div>
+  </div>
+</div>
+
+<div class="progress-wrap" id="progressWrap">
+  <div class="progress-label">Progress</div>
+  <div class="progress-bar-outer">
+    <div class="progress-bar-inner" id="progressBar"></div>
+  </div>
+  <div class="progress-count" id="progressCount">0 / 12</div>
+</div>
+
+<!-- ROUTING SCREEN -->
+<div id="routingScreen">
+  <div class="routing-hero">
+    <div class="hero-pill" style="margin-bottom:20px;">Step 1 of 2 — Tell us about your business</div>
+    <h2>Where do you currently<br><em>source your stock from?</em></h2>
+    <p>This determines which questions are most relevant to your business right now.</p>
+  </div>
+  <div class="routing-options">
+    <div class="routing-option" onclick="startAudit('ukus')">
+      <div class="ro-icon">🇬🇧🇺🇸</div>
+      <div>
+        <div class="ro-title">I source from the UK and/or US</div>
+        <div class="ro-desc">You already import from the UK or US — or both. You want to improve margins, reduce costs, and scale your existing operation.</div>
+        <div class="routing-badge green">Current UK/US importer</div>
+      </div>
+    </div>
+    <div class="routing-option" onclick="startAudit('other')">
+      <div class="ro-icon">🌍</div>
+      <div>
+        <div class="ro-title">I source from China, Dubai, EU or locally</div>
+        <div class="ro-desc">You import from other markets — or buy locally. You may be curious about UK/US sourcing or looking to diversify your supply chain.</div>
+        <div class="routing-badge teal">Looking to expand / switch sources</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="audit-wrap" id="auditWrap" style="display:none;">
+  <!-- QUESTIONS RENDERED BY JS -->
+</div>
+
+<div id="results"></div>
+
+<!-- Hidden iframe for Google Sheets POST (CORS-free) -->
+<iframe name="hiddenFrame" style="display:none;"></iframe>
+
+<script>
+// ─── CONFIG ───────────────────────────────────────────
+const SHEET_URL   = 'https://script.google.com/macros/s/AKfycbwVmIZdgoBq-_vpcstgvRj2NIuR0F_2GT0UmnqnqB9wrseDssdrMMIb2PHUZv8dmMcCQQ/exec';
+const FORMSPARK_URL = 'https://submit-form.com/B9qaSvbz3';
+const WA_NUM      = '15517750655';
+
+// ─── QUESTION SETS ────────────────────────────────────
+
+const QS_UKUS = [
+  { id:'sourcing',    icon:'🌍', num:'Area 01', name:'Sourcing & Product Access',
+    desc:'How reliably you access genuine discounts and quality stock from UK/US markets',
+    questions:[
+      { id:'q1', leak:true,
+        text:'How do you currently find deep-discount clothing and accessories from UK/US retailers?',
+        options:[
+          {label:'Random browsing — no consistent system or planned sale calendar', score:0, type:'bad'},
+          {label:'I have 1–2 sources but I miss many discount windows', score:1, type:'ok'},
+          {label:'I have a reliable network of sources, buyer contacts and planned sale alerts', score:3, type:'good'},
+        ]},
+      { id:'q2', leak:true,
+        text:'Do you have a trusted person in the UK or US who can shop, inspect and hold goods on your behalf?',
+        options:[
+          {label:'No — this is a major gap that limits what I can buy and when', score:0, type:'bad'},
+          {label:'I have someone but they are unreliable or charge too much', score:1, type:'ok'},
+          {label:'Yes — vetted, reliable, and we have a clear working arrangement', score:3, type:'good'},
+        ]},
+    ]},
+  { id:'shipping',    icon:'📦', num:'Area 02', name:'Shipping & Landed Cost',
+    desc:'How efficiently and cost-effectively you move goods to your Ghana warehouse',
+    questions:[
+      { id:'q3', leak:true,
+        text:'Do you calculate your full landed cost per item (goods + buyer fee + shipping + clearance) before you buy?',
+        options:[
+          {label:'No — I estimate roughly and am often surprised by the real total', score:0, type:'bad'},
+          {label:'I do a rough calculation but it is not always accurate', score:1, type:'ok'},
+          {label:'Yes — I use a precise landed cost formula before every buying decision', score:3, type:'good'},
+        ]},
+      { id:'q4', leak:true,
+        text:'How do you manage cash flow during the 5–9 weeks your stock is in transit at sea?',
+        options:[
+          {label:"I don't — capital is locked until goods arrive and start selling", score:0, type:'bad'},
+          {label:'I pre-sell some items but it is not a structured system', score:1, type:'ok'},
+          {label:'I collect pre-order deposits that fund the next buying cycle while this one is at sea', score:3, type:'good'},
+        ]},
+    ]},
+  { id:'currency',    icon:'💱', num:'Area 03', name:'Currency & Cash Position',
+    desc:'How well you protect your margins from rate movements and maintain buying power',
+    questions:[
+      { id:'q5', leak:true,
+        text:'When you price imported goods for sale in Ghana, how do you account for possible cedi depreciation during your selling window?',
+        options:[
+          {label:"I convert at today's rate and add a margin — no buffer built in for future changes", score:0, type:'bad'},
+          {label:'I add an informal buffer but it is not based on a consistent formula', score:1, type:'ok'},
+          {label:'I use a structured cedi buffer formula (15–20% above current rate) on every item', score:3, type:'good'},
+        ]},
+      { id:'q6', leak:true,
+        text:'When a good buying opportunity appears — a clearance sale, a new brand — do you have the cash to act on it?',
+        options:[
+          {label:'Rarely — my capital is nearly always tied up in existing stock', score:0, type:'bad'},
+          {label:'Sometimes — depends on timing and what else is happening', score:1, type:'ok'},
+          {label:'Yes — I maintain a buying reserve and have access to financing when needed', score:3, type:'good'},
+        ]},
+    ]},
+  { id:'sales',       icon:'🛍️', num:'Area 04', name:'Sales & Customer Flow',
+    desc:'How consistently you convert interested people into paying customers',
+    questions:[
+      { id:'q7', leak:true,
+        text:'How consistent and predictable is your revenue month to month?',
+        options:[
+          {label:'Very inconsistent — some months are strong, others are very quiet', score:0, type:'bad'},
+          {label:'Moderate — I have regular customers but cannot predict or grow volume', score:1, type:'ok'},
+          {label:'Consistent and growing — I have a structured customer acquisition system', score:3, type:'good'},
+        ]},
+      { id:'q8', leak:true,
+        text:'When stock sits unsold for more than 90 days, what do you do?',
+        options:[
+          {label:'It sits — capital stays locked with no clear recovery strategy', score:0, type:'bad'},
+          {label:'I discount heavily or wait, often taking a loss when desperate', score:1, type:'ok'},
+          {label:'I activate a structured liquidation strategy to recover capital quickly', score:3, type:'good'},
+        ]},
+    ]},
+  { id:'operations',  icon:'⚙️', num:'Area 05', name:'Margins & Overhead',
+    desc:'How profitable your cost structure is relative to your revenue',
+    questions:[
+      { id:'q9', leak:true,
+        text:'What percentage of your monthly revenue goes to fixed costs — rent, staff, and storage?',
+        options:[
+          {label:'Over 40% — fixed costs are eating into profits significantly', score:0, type:'bad'},
+          {label:'20–40% — manageable but leaves limited room to reinvest or grow', score:1, type:'ok'},
+          {label:'Under 20% — I have built a lean, intentional cost structure', score:3, type:'good'},
+        ]},
+      { id:'q10', leak:true,
+        text:'Do you know your exact gross margin per product category after all costs are included?',
+        options:[
+          {label:'No — I have a rough sense but no accurate numbers by category', score:0, type:'bad'},
+          {label:'For some categories yes, but not consistently across all products', score:1, type:'ok'},
+          {label:'Yes — I track margin by category and use this to guide buying decisions', score:3, type:'good'},
+        ]},
+    ]},
+  { id:'growth',      icon:'📈', num:'Area 06', name:'Scale & Growth Readiness',
+    desc:'How well your business is structured to grow without breaking',
+    questions:[
+      { id:'q11', leak:true,
+        text:'If you doubled your order size on your next buying trip, could your current operation handle it?',
+        options:[
+          {label:'No — storage, cash flow, and systems would not cope with double the volume', score:0, type:'bad'},
+          {label:'Partially — some areas could scale but others would struggle', score:1, type:'ok'},
+          {label:'Yes — I have intentionally built capacity ahead of current demand', score:3, type:'good'},
+        ]},
+      { id:'q12',
+        text:'What best describes your business growth trajectory right now?',
+        options:[
+          {label:"Flat or declining — I'm working hard but revenue is not growing", score:0, type:'bad'},
+          {label:'Slow growth — moving in the right direction but not at the pace I want', score:1, type:'ok'},
+          {label:'Strong consistent growth — I have a clear strategy and it is working', score:3, type:'good'},
+        ]},
+    ]},
+];
+
+const QS_OTHER = [
+  { id:'sourcing_o',   icon:'🌍', num:'Area 01', name:'Current Sourcing & Quality',
+    desc:'How well your current supply chain delivers profitable, consistent stock',
+    questions:[
+      { id:'q1', leak:true,
+        text:'How satisfied are you with the quality and authenticity of stock from your current source (China, Dubai, EU, or local)?',
+        options:[
+          {label:'Not satisfied — quality issues and authenticity concerns are common', score:0, type:'bad'},
+          {label:'Mostly okay but there are regular quality or consistency problems', score:1, type:'ok'},
+          {label:'Very satisfied — reliable quality and authenticity from my current source', score:3, type:'good'},
+        ]},
+      { id:'q2', leak:true,
+        text:'What is your main reason for not sourcing from the UK or US yet?',
+        options:[
+          {label:"I don't know how — payments, buyer contacts, and shipping feel out of reach", score:0, type:'bad'},
+          {label:'I have tried but hit blockers — payment cards, no contacts, high costs', score:1, type:'ok'},
+          {label:'I am actively planning to start UK/US sourcing in the next 3–6 months', score:3, type:'good'},
+        ]},
+    ]},
+  { id:'shipping_o',   icon:'📦', num:'Area 02', name:'Shipping & Cost Control',
+    desc:'How well you manage the true cost of getting stock to Ghana',
+    questions:[
+      { id:'q3', leak:true,
+        text:'Do you calculate your exact landed cost per item before buying — purchase price plus all fees and shipping?',
+        options:[
+          {label:'No — I estimate and am often surprised by the real final cost', score:0, type:'bad'},
+          {label:'I do a rough calculation but it is not always precise', score:1, type:'ok'},
+          {label:'Yes — I calculate full landed cost before every buying decision', score:3, type:'good'},
+        ]},
+      { id:'q4', leak:true,
+        text:'How do you manage cash flow while stock is in transit?',
+        options:[
+          {label:"I don't — capital is locked until goods arrive and I start selling", score:0, type:'bad'},
+          {label:'I try to pre-sell some items but it is not consistent', score:1, type:'ok'},
+          {label:'I use pre-orders and deposits to keep cash flowing between shipments', score:3, type:'good'},
+        ]},
+    ]},
+  { id:'currency_o',   icon:'💱', num:'Area 03', name:'Pricing & Cash Position',
+    desc:'How well you protect margins and maintain the ability to buy when opportunities arise',
+    questions:[
+      { id:'q5', leak:true,
+        text:'How do you price imported goods to protect your margin if the cedi weakens before you sell?',
+        options:[
+          {label:'I convert at the current rate and add a markup — no buffer built in', score:0, type:'bad'},
+          {label:'I add an informal buffer but it is not based on a formula', score:1, type:'ok'},
+          {label:'I use a structured pricing formula with a rate buffer to absorb depreciation', score:3, type:'good'},
+        ]},
+      { id:'q6', leak:true,
+        text:'When a buying opportunity arrives unexpectedly — a clearance, a good deal — can you act on it financially?',
+        options:[
+          {label:'No — my cash is nearly always tied up in existing stock', score:0, type:'bad'},
+          {label:'Sometimes — depends on timing and what else is happening', score:1, type:'ok'},
+          {label:'Yes — I maintain a buying reserve and can access credit if needed', score:3, type:'good'},
+        ]},
+    ]},
+  { id:'sales_o',      icon:'🛍️', num:'Area 04', name:'Sales & Customer Flow',
+    desc:'How consistently you convert interest into revenue',
+    questions:[
+      { id:'q7', leak:true,
+        text:'How predictable and consistent is your monthly revenue?',
+        options:[
+          {label:'Very unpredictable — big swings month to month', score:0, type:'bad'},
+          {label:"Moderate — some regulars but I can't reliably predict or grow volume", score:1, type:'ok'},
+          {label:'Consistent and growing — I have a repeatable customer acquisition approach', score:3, type:'good'},
+        ]},
+      { id:'q8', leak:true,
+        text:'What happens when stock stops moving after several months?',
+        options:[
+          {label:'It piles up — cash stays locked with no structured recovery plan', score:0, type:'bad'},
+          {label:'I discount heavily and accept a loss when I get desperate', score:1, type:'ok'},
+          {label:'I run structured clearance campaigns that recover most of the capital', score:3, type:'good'},
+        ]},
+    ]},
+  { id:'ops_o',        icon:'⚙️', num:'Area 05', name:'Margins & Overhead',
+    desc:'How profitable your current cost structure is',
+    questions:[
+      { id:'q9', leak:true,
+        text:'What percentage of monthly revenue goes to fixed overhead — rent, staff, storage?',
+        options:[
+          {label:'Over 40% — overheads are eating my margins', score:0, type:'bad'},
+          {label:'20–40% — manageable but limits reinvestment and growth', score:1, type:'ok'},
+          {label:'Under 20% — I run a deliberately lean operation', score:3, type:'good'},
+        ]},
+      { id:'q10', leak:true,
+        text:'Do you track your exact margin per product category after all costs?',
+        options:[
+          {label:'No — I have a broad sense but no precise per-category numbers', score:0, type:'bad'},
+          {label:'For some categories yes, but not comprehensively', score:1, type:'ok'},
+          {label:'Yes — I track margin by category and it drives my buying decisions', score:3, type:'good'},
+        ]},
+    ]},
+  { id:'growth_o',     icon:'📈', num:'Area 06', name:'Scale & Expansion Readiness',
+    desc:'How ready your business is to grow — including into UK/US sourcing',
+    questions:[
+      { id:'q11', leak:true,
+        text:'If you decided to start sourcing from the UK or US today, how prepared is your business?',
+        options:[
+          {label:"Not prepared — I wouldn't know where to start with payments, buyers, or shipping", score:0, type:'bad'},
+          {label:'Partially — I understand the concept but lack the contacts or systems to start', score:1, type:'ok'},
+          {label:'Ready — I have done my research and am prepared to start soon', score:3, type:'good'},
+        ]},
+      { id:'q12',
+        text:'What best describes your overall business growth right now?',
+        options:[
+          {label:"Flat or declining — working hard but revenue isn't growing", score:0, type:'bad'},
+          {label:'Slow growth — moving but not at the pace I want', score:1, type:'ok'},
+          {label:'Strong growth — clear plan and it is working well', score:3, type:'good'},
+        ]},
+    ]},
+];
+
+// ─── STATE ────────────────────────────────────────────
+const TOTAL_Q  = 12;
+const MAX_SCORE = 36;
+let activeCategories = QS_UKUS;
+let sourcingType     = 'ukus';
+let answers          = {};
+let qualAnswers      = {};
+
+// ─── ROUTING ──────────────────────────────────────────
+function startAudit(type) {
+  sourcingType     = type;
+  activeCategories = (type === 'ukus') ? QS_UKUS : QS_OTHER;
+  document.getElementById('routingScreen').style.display  = 'none';
+  document.getElementById('auditWrap').style.display      = 'block';
+  document.getElementById('progressWrap').style.display   = 'flex';
+  buildAudit();
+}
+
+// ─── BUILD QUESTIONS ──────────────────────────────────
+function buildAudit() {
+  const wrap = document.getElementById('auditWrap');
+  wrap.innerHTML = '';
+  let qNum = 0;
+
+  activeCategories.forEach(function(cat) {
+    const catDiv = document.createElement('div');
+    catDiv.className = 'category';
+    catDiv.innerHTML =
+      '<div class="cat-header">' +
+        '<div class="cat-icon">' + cat.icon + '</div>' +
+        '<div class="cat-info">' +
+          '<div class="cat-num">' + cat.num + '</div>' +
+          '<div class="cat-name">' + cat.name + '</div>' +
+          '<div class="cat-desc">' + cat.desc + '</div>' +
+        '</div>' +
+      '</div>';
+
+    cat.questions.forEach(function(q) {
+      qNum++;
+      const qDiv = document.createElement('div');
+      qDiv.className = 'question';
+      qDiv.id = 'q-block-' + q.id;
+      const leakTag = q.leak ? '<span class="leak-tag">Profit Leak Risk</span>' : '';
+      let optsHtml = '';
+      q.options.forEach(function(opt, oi) {
+        const badge = opt.type === 'bad' ? 'High Leak Risk' : opt.type === 'ok' ? 'Partial Leak' : 'Healthy';
+        optsHtml +=
+          '<div class="option" data-qid="' + q.id + '" data-oi="' + oi +
+          '" data-score="' + opt.score + '" data-type="' + opt.type +
+          '" onclick="pick(\'' + q.id + '\',' + oi + ',' + opt.score + ',\'' + opt.type + '\')">' +
+          '<div class="option-radio"></div>' +
+          '<div class="option-label">' + opt.label + '</div>' +
+          '<div class="option-score-badge badge-' + opt.type + '">' + badge + '</div>' +
+          '</div>';
+      });
+      qDiv.innerHTML =
+        '<div class="q-header">' +
+          '<div class="q-num">' + String(qNum).padStart(2,'0') + '</div>' +
+          '<div class="q-text">' + q.text + leakTag + '</div>' +
+        '</div>' +
+        '<div class="options">' + optsHtml + '</div>';
+      catDiv.appendChild(qDiv);
+    });
+    wrap.appendChild(catDiv);
+  });
+
+  const sub = document.createElement('div');
+  sub.className = 'submit-section';
+  sub.id = 'submitSection';
+  sub.innerHTML =
+    '<h3>Get Your Profit Leak Score</h3>' +
+    '<p>Enter your details to receive your personalised results instantly.</p>' +
+    '<input class="name-input" id="nameInput" type="text" placeholder="Your first name" style="margin-bottom:8px;">' +
+    '<div class="email-row">' +
+      '<input class="email-input" id="emailInput" type="text" placeholder="Your email address (e.g. name@gmail.com)">' +
+      '<button class="submit-btn" id="submitBtn" onclick="runSubmit()" disabled>See My Results \u2192</button>' +
+    '</div>' +
+    '<div id="emailError" style="display:none;font-size:11px;color:var(--red);margin-top:4px;text-align:left;max-width:460px;margin-left:auto;margin-right:auto;">\u26a0 Please enter a valid email address</div>' +
+    '<div class="incomplete-note" id="incompleteNote">Complete all <span id="remaining">12</span> questions to unlock your results</div>';
+  wrap.appendChild(sub);
+
+  document.getElementById('nameInput').addEventListener('input', checkReady);
+  document.getElementById('emailInput').addEventListener('input', checkReady);
+  updateBar();
+}
+
+// ─── INTERACTIONS ─────────────────────────────────────
+function pick(qid, oi, score, type) {
+  document.querySelectorAll('[data-qid="' + qid + '"]').forEach(function(el) {
+    el.classList.remove('selected-bad','selected-ok','selected-good');
+  });
+  document.querySelector('[data-qid="' + qid + '"][data-oi="' + oi + '"]').classList.add('selected-' + type);
+  document.getElementById('q-block-' + qid).classList.add('answered');
+  answers[qid] = {score:score, type:type, oi:oi};
+  updateBar();
+  checkReady();
+}
+
+function updateBar() {
+  const n = Object.keys(answers).length;
+  document.getElementById('progressBar').style.width = (n / TOTAL_Q * 100) + '%';
+  document.getElementById('progressCount').textContent = n + ' / ' + TOTAL_Q;
+  const r = document.getElementById('remaining');
+  if (r) r.textContent = TOTAL_Q - n;
+}
+
+function validEmail(e) { return /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(e); }
+
+function checkReady() {
+  const n   = (document.getElementById('nameInput').value || '').trim();
+  const e   = (document.getElementById('emailInput').value || '').trim();
+  const ans = Object.keys(answers).length;
+  const btn = document.getElementById('submitBtn');
+  const err = document.getElementById('emailError');
+  const inp = document.getElementById('emailInput');
+  const nte = document.getElementById('incompleteNote');
+
+  if (e && !validEmail(e)) {
+    inp.style.borderColor = 'var(--red)';
+    err.style.display = 'block';
+  } else {
+    inp.style.borderColor = e ? 'var(--green)' : 'var(--border)';
+    err.style.display = 'none';
+  }
+
+  const ready = (ans === TOTAL_Q) && n && e && validEmail(e);
+  btn.disabled = !ready;
+
+  const rem = TOTAL_Q - ans;
+  if (rem > 0)             nte.innerHTML = 'Complete all <span>' + rem + '</span> question' + (rem !== 1 ? 's' : '') + ' to unlock your results';
+  else if (!n)             nte.innerHTML = 'Enter your name to unlock your results';
+  else if (!e||!validEmail(e)) nte.innerHTML = 'Enter a valid email address to unlock your results';
+  else                     nte.innerHTML = '';
+}
+
+// ─── SUBMIT & CALCULATE ───────────────────────────────
+function runSubmit() {
+  const name  = (document.getElementById('nameInput').value || '').trim();
+  const email = (document.getElementById('emailInput').value || '').trim();
+  const btn   = document.getElementById('submitBtn');
+  btn.disabled = true;
+  btn.textContent = 'Calculating\u2026';
+
+  let total = 0;
+  const catScores   = {};
+  const topLeaks    = [];
+  const ansDetail   = {};
+
+  activeCategories.forEach(function(cat) {
+    let ct = 0;
+    cat.questions.forEach(function(q) {
+      const a = answers[q.id];
+      if (a) {
+        ct += a.score;
+        ansDetail[q.id] = {
+          question: q.text,
+          answer:   q.options[a.oi].label,
+          score:    a.score,
+          type:     a.type,
+          category: cat.name
+        };
+        if (a.type === 'bad') topLeaks.push({cat: cat.name, q: q.text});
+      }
+    });
+    catScores[cat.id] = {score:ct, max:cat.questions.length*3, name:cat.name, icon:cat.icon};
+    total += ct;
+  });
+
+  const pct  = Math.round(total / MAX_SCORE * 100);
+  const tier = pct <= 33 ? 'Critical \u2014 High Profit Leakage'
+             : pct <= 66 ? 'Moderate \u2014 Leaks Are Costing You'
+             :             'Strong \u2014 Minor Leaks, Ready to Scale';
+  const src  = sourcingType === 'ukus' ? 'Current UK/US importer' : 'Sourcing from other markets';
+
+  // Send to Google Sheets
+  try {
+    fetch(SHEET_URL, {
+      method:  'POST',
+      headers: {'Content-Type':'application/json'},
+      body:    JSON.stringify({
+        type:        'audit_submission',
+        name:        name,
+        email:       email,
+        score:       total,
+        pct:         pct,
+        tier:        tier,
+        sourcingType: src,
+        timestamp:   new Date().toLocaleString('en-GB',{timeZone:'Africa/Accra'}),
+        answers:     ansDetail,
+        topLeaks:    topLeaks.map(function(l){return l.cat+': '+l.q;}).join(' | ')
+      }),
+      mode: 'no-cors'
+    });
+  } catch(ex) {}
+
+  // Formspark backup (sign up free at formspark.io)
+  try {
+    fetch(FORMSPARK_URL, {
+      method:  'POST',
+      headers: {'Content-Type':'application/json','Accept':'application/json'},
+      body: JSON.stringify({
+        name:   name,
+        email:  email,
+        score:  total,
+        tier:   tier,
+        source: src,
+        leaks:  topLeaks.map(function(l){return l.cat;}).join(', ')
+      })
+    }).catch(function(){});
+  } catch(ex) {}
+
+  showResults(total, catScores, topLeaks, name, pct, tier, src);
+}
+
+// ─── RESULTS ──────────────────────────────────────────
+function showResults(total, catScores, topLeaks, name, pct, tier, src) {
+  document.getElementById('auditWrap').style.display    = 'none';
+  document.getElementById('progressWrap').style.display = 'none';
+
+  var color, desc, cta;
+  if (pct <= 33) {
+    color = '#C04030';
+    desc  = name + ', your business has significant profit leaks across multiple areas. Every single one is fixable \u2014 and closing even 3 of them could meaningfully increase what you take home this year.';
+    cta   = 'Fix My Leaks \u2014 Talk to Kwabena';
+  } else if (pct <= 66) {
+    color = '#D06820';
+    desc  = name + ', you have a working business with real potential \u2014 but several profit leaks are quietly reducing your take-home every cycle. Fixing them means installing better systems, not starting over.';
+    cta   = 'Seal My Leaks \u2014 Talk to Kwabena';
+  } else {
+    color = '#2A7A48';
+    desc  = name + ', your fundamentals are solid. You have fewer leaks than most \u2014 but the remaining gaps may be limiting how fast you can scale.';
+    cta   = 'Scale Faster \u2014 Talk to Kwabena';
+  }
+
+  const C   = 2 * Math.PI * 54;
+  const off = C - (pct / 100 * C);
+
+  var catHtml = '';
+  Object.keys(catScores).forEach(function(id) {
+    var cs  = catScores[id];
+    var cp  = Math.round(cs.score / cs.max * 100);
+    var bc  = cp <= 33 ? 'bar-red' : cp <= 66 ? 'bar-orange' : 'bar-green';
+    var sc  = cp <= 33 ? '#C04030' : cp <= 66 ? '#D06820'    : '#3DAA68';
+    var lb  = cp <= 33 ? 'Leaking' : cp <= 66 ? 'Partial'    : 'Healthy';
+    catHtml +=
+      '<div class="cat-result">' +
+        '<div><div class="cat-result-name">' + cs.icon + ' ' + cs.name + '</div>' +
+        '<div class="cat-result-bar-outer"><div class="cat-result-bar ' + bc + '" style="width:0%" data-width="' + cp + '%"></div></div></div>' +
+        '<div><div class="cat-result-score" style="color:' + sc + '">' + cs.score + '/' + cs.max + '</div>' +
+        '<div class="cat-result-label" style="color:' + sc + '">' + lb + '</div></div>' +
+      '</div>';
+  });
+
+  var leakHtml = '';
+  var shown = topLeaks.slice(0,4);
+  if (shown.length) {
+    shown.forEach(function(l, i) {
+      leakHtml +=
+        '<div class="leak-item">' +
+          '<div class="leak-num">' + String(i+1).padStart(2,'0') + '</div>' +
+          '<div class="leak-content"><h4>' + l.cat + '</h4><p>' + l.q + '</p></div>' +
+        '</div>';
+    });
+  } else {
+    leakHtml = '<p style="color:var(--muted);font-size:14px;padding:20px 0;">No critical leaks detected \u2014 your business is performing well across all areas.</p>';
+  }
+
+  var tierFull = pct <= 33 ? '🔴 Critical \u2014 High Profit Leakage'
+               : pct <= 66 ? '🟠 Moderate \u2014 Leaks Are Costing You'
+               :             '🟢 Strong \u2014 Minor Leaks, Ready to Scale';
+
+  // Store for qualifier
+  window._auditResult = {name:name, total:total, pct:pct, tier:tier, src:src, leaks:topLeaks};
+
+  const res = document.getElementById('results');
+  res.style.display = 'block';
+  res.innerHTML =
+    '<div class="result-hero animate-in">' +
+      '<div class="score-ring"><svg viewBox="0 0 120 120">' +
+        '<circle class="score-ring-bg" cx="60" cy="60" r="54"/>' +
+        '<circle class="score-ring-fill" cx="60" cy="60" r="54" stroke="' + color + '" stroke-dasharray="' + C + '" stroke-dashoffset="' + C + '" id="ringFill"/>' +
+      '</svg><div class="score-center">' +
+        '<div class="score-num" style="color:' + color + '">' + pct + '</div>' +
+        '<div class="score-denom">/ 100</div>' +
+      '</div></div>' +
+      '<div class="result-tier-label" style="color:' + color + '">' + tierFull + '</div>' +
+      '<div class="result-title">' + total + ' out of ' + MAX_SCORE + ' points</div>' +
+      '<p class="result-desc">' + desc + '</p>' +
+    '</div>' +
+    '<div class="breakdown-title">Your Score by Business Area</div>' + catHtml +
+    '<div class="leaks-title">Your Top Profit Leaks \u2014 Fix These First</div>' + leakHtml +
+    '<div class="result-cta">' +
+      '<h3>Ready to <em>Seal Every Leak?</em></h3>' +
+      '<p>Kwabena has 12 years of operational experience solving exactly these problems in a real Ghana import business generating GH\u20b5 2.4M this year.</p>' +
+      '<button class="cta-btn" onclick="openQualifier()">' + cta + ' \u2192</button>' +
+      '<div class="cta-note">Free conversation \u00b7 No pressure \u00b7 Specific advice for your score</div>' +
+    '</div>';
+
+  setTimeout(function(){ document.getElementById('ringFill').style.strokeDashoffset = off; }, 200);
+  setTimeout(function(){ document.querySelectorAll('.cat-result-bar').forEach(function(b){ b.style.width = b.dataset.width; }); }, 400);
+  res.scrollIntoView({behavior:'smooth', block:'start'});
+}
+
+// ─── QUALIFIER OVERLAY ────────────────────────────────
+function openQualifier() {
+  const ov = document.createElement('div');
+  ov.id = 'qualOv';
+  ov.style.cssText = 'position:fixed;inset:0;background:rgba(9,9,6,0.93);z-index:9999;display:flex;align-items:center;justify-content:center;padding:20px;';
+  ov.innerHTML =
+    '<div style="background:var(--card);border:1px solid var(--border);max-width:480px;width:100%;padding:36px 32px;">' +
+      '<div style="font-size:10px;font-weight:700;letter-spacing:.25em;text-transform:uppercase;color:var(--gold);margin-bottom:12px;">One Last Step \u2014 2 Quick Questions</div>' +
+      '<div style="font-family:\'Fraunces\',serif;font-size:22px;font-weight:900;color:var(--white);margin-bottom:6px;line-height:1.2;">Help us give you the <em style="color:var(--gold-light)">right solution</em></div>' +
+      '<div style="font-size:13px;color:var(--muted);margin-bottom:28px;line-height:1.55;">10 seconds \u2014 so we can skip the diagnosis and go straight to solutions when we talk.</div>' +
+      '<div style="margin-bottom:20px;">' +
+        '<div style="font-size:11px;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--off);margin-bottom:10px;">What is your average monthly revenue?</div>' +
+        '<div id="ql-rev" style="display:flex;flex-direction:column;gap:6px;">' +
+          qOpt('revenue','rev_a','Under GH\u20b5 5,000 / month') +
+          qOpt('revenue','rev_b','GH\u20b5 5,000 \u2013 20,000 / month') +
+          qOpt('revenue','rev_c','GH\u20b5 20,000 \u2013 60,000 / month') +
+          qOpt('revenue','rev_d','GH\u20b5 60,000 \u2013 150,000 / month') +
+          qOpt('revenue','rev_e','Over GH\u20b5 150,000 / month') +
+        '</div>' +
+      '</div>' +
+      '<div style="margin-bottom:28px;">' +
+        '<div style="font-size:11px;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--off);margin-bottom:10px;">How long have you been in this business?</div>' +
+        '<div id="ql-age" style="display:flex;flex-direction:column;gap:6px;">' +
+          qOpt('age','age_a','Less than 1 year') +
+          qOpt('age','age_b','1 \u2013 3 years') +
+          qOpt('age','age_c','3 \u2013 7 years') +
+          qOpt('age','age_d','7+ years') +
+        '</div>' +
+      '</div>' +
+      '<a id="qualBtn" href="#" onclick="return sendToWA(this)" ' +
+        'style="display:block;text-align:center;background:var(--gold);color:var(--black);text-decoration:none;font-family:\'Syne\',sans-serif;font-size:12px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;padding:14px 24px;pointer-events:none;opacity:.4;transition:all .2s;">' +
+        'Open WhatsApp \u0026 Get My Action Plan \u2192' +
+      '</a>' +
+      '<div style="font-size:11px;color:var(--muted);margin-top:10px;text-align:center;">WhatsApp opens instantly \u2014 free conversation, no pressure</div>' +
+    '</div>';
+  document.body.appendChild(ov);
+}
+
+function qOpt(group, val, label) {
+  return '<div class="qual-opt" data-group="' + group + '" data-val="' + val + '" onclick="pickQ(this,\'' + group + '\')" ' +
+    'style="padding:10px 14px;background:var(--card2);border:1px solid var(--border);cursor:pointer;font-size:13px;color:var(--off);transition:all .15s;display:flex;align-items:center;gap:10px;">' +
+    '<div style="width:14px;height:14px;border:1.5px solid var(--border);border-radius:50%;flex-shrink:0;transition:all .15s;"></div>' +
+    label + '</div>';
+}
+
+function pickQ(el, group) {
+  document.querySelectorAll('[data-group="' + group + '"]').forEach(function(o) {
+    o.style.background  = 'var(--card2)';
+    o.style.borderColor = 'var(--border)';
+    o.style.color       = 'var(--off)';
+    o.querySelector('div').style.background  = '';
+    o.querySelector('div').style.borderColor = 'var(--border)';
+  });
+  el.style.background  = 'rgba(212,168,50,0.1)';
+  el.style.borderColor = 'var(--gold)';
+  el.style.color       = 'var(--white)';
+  el.querySelector('div').style.background  = 'var(--gold)';
+  el.querySelector('div').style.borderColor = 'var(--gold)';
+  qualAnswers[group] = {val:el.dataset.val, label:el.textContent.trim()};
+
+  if (qualAnswers.revenue && qualAnswers.age) {
+    var btn = document.getElementById('qualBtn');
+    btn.style.opacity      = '1';
+    btn.style.pointerEvents = 'auto';
+  }
+}
+
+function sendToWA(link) {
+  var r  = window._auditResult || {};
+  var rev = qualAnswers.revenue ? qualAnswers.revenue.label : 'Not specified';
+  var age = qualAnswers.age     ? qualAnswers.age.label     : 'Not specified';
+
+  // Update sheets with qualifier data
+  try {
+    fetch(SHEET_URL, {
+      method:  'POST',
+      headers: {'Content-Type':'application/json'},
+      body:    JSON.stringify({
+        type:        'qualifier_update',
+        name:        r.name || '',
+        revenue:     rev,
+        businessAge: age,
+        sourcingType: r.src || '',
+        timestamp:   new Date().toLocaleString('en-GB',{timeZone:'Africa/Accra'})
+      }),
+      mode: 'no-cors'
+    });
+  } catch(ex) {}
+
+  var leakLines = (r.leaks||[]).slice(0,3).map(function(l){ return '\u2022 ' + l.cat; }).join('\n');
+  var msg =
+    'Hi Kwabena! I just completed the Retail Profit Leak Audit.\n\n' +
+    'Name: ' + (r.name||'') + '\n' +
+    'Score: ' + (r.total||0) + '/36 (' + (r.pct||0) + '%)\n' +
+    'Result: ' + (r.tier||'') + '\n\n' +
+    'Sourcing: ' + (r.src||'') + '\n' +
+    'Monthly Revenue: ' + rev + '\n' +
+    'Years in Business: ' + age + '\n\n' +
+    'Top Leak Areas:\n' + leakLines + '\n\n' +
+    "I'd like to find out how The Profitable Retail System can help me.";
+
+  link.href = 'https://wa.me/' + WA_NUM + '?text=' + encodeURIComponent(msg);
+  document.getElementById('qualOv').remove();
+  return true;
+}
+</script>
+</body>
+</html>
