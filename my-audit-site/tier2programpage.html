@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Profitable Operator™ — Tier 2 | The Profitable Retail System</title>
+<meta name="description" content="The 12-week coached program for Ghana clothing retailers ready to scale — demand forecasting, margin protection, sales conversion, dead stock recovery and more.">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Syne:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --black:#060A08;--deep:#0C1210;--dark:#121A16;--card:#181E1A;--card2:#1E2620;
+  --border:#243028;--border2:#304040;
+  --teal:#2A9080;--teal-l:#3ABAA8;--teal-pale:rgba(42,144,128,.1);--teal-dim:rgba(42,144,128,.08);
+  --gold:#D4A832;--gold-dim:rgba(212,168,50,.1);
+  --white:#EEF4F0;--off:#A8C0B4;--muted:#506058;
+  --red:#C04040;--red-bg:rgba(192,64,64,.1);
+  --green:#2A8A54;--green-l:#3DB870;--green-bg:rgba(42,138,84,.1);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--black);color:var(--off);font-family:'Syne',sans-serif;font-size:14px;line-height:1.7;overflow-x:hidden}
+
+.topbar{background:var(--deep);border-bottom:1px solid var(--border);padding:14px 32px;display:flex;justify-content:space-between;align-items:center}
+.tb-brand{font-family:'Fraunces',serif;font-size:13px;font-weight:900;color:var(--teal-l);letter-spacing:.02em}
+.tb-brand span{color:var(--white);font-weight:400;font-style:italic}
+.tb-tier{font-size:9px;font-weight:700;letter-spacing:.3em;text-transform:uppercase;color:var(--muted)}
+
+.hero{padding:80px 32px 64px;text-align:center;background:radial-gradient(ellipse 80% 50% at 50% 0%,rgba(42,144,128,.08) 0%,transparent 65%);border-bottom:1px solid var(--border)}
+.hero-tier{display:inline-flex;align-items:center;gap:8px;border:1px solid rgba(42,144,128,.3);background:var(--teal-dim);color:var(--teal-l);font-size:9px;font-weight:700;letter-spacing:.3em;text-transform:uppercase;padding:6px 18px;margin-bottom:8px}
+.tier1-badge{display:inline-block;background:var(--gold-dim);border:1px solid rgba(212,168,50,.2);color:var(--gold);font-size:9px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;padding:4px 14px;margin-bottom:20px}
+.hero h1{font-family:'Fraunces',serif;font-size:clamp(34px,6vw,74px);font-weight:900;line-height:.98;letter-spacing:-.02em;color:var(--white);margin-bottom:8px}
+.hero h1 em{font-style:italic;color:var(--teal-l)}
+.hero-sub{font-size:17px;font-weight:300;color:var(--muted);max-width:520px;margin:0 auto 40px;line-height:1.6}
+.hero-price-wrap{display:inline-block;text-align:center;margin-bottom:36px}
+.hero-price{font-family:'Fraunces',serif;font-size:clamp(48px,7vw,72px);font-weight:900;color:var(--teal-l);line-height:1}
+.hero-price-note{font-size:11px;color:var(--muted);margin-top:4px;letter-spacing:.08em;text-transform:uppercase}
+.hero-stats{display:flex;gap:40px;justify-content:center;flex-wrap:wrap}
+.hs-num{font-family:'Fraunces',serif;font-size:28px;font-weight:900;color:var(--teal-l);line-height:1}
+.hs-label{font-size:9px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);margin-top:3px}
+
+.wrap{max-width:880px;margin:0 auto;padding:0 32px}
+section{padding:72px 0}
+.sec-rule{border:none;border-top:1px solid var(--border)}
+.eyebrow{font-size:9px;font-weight:700;letter-spacing:.35em;text-transform:uppercase;color:var(--teal-l);margin-bottom:10px;display:flex;align-items:center;gap:10px}
+.eyebrow::before{content:'';width:18px;height:1px;background:var(--teal)}
+h2{font-family:'Fraunces',serif;font-size:clamp(24px,3.5vw,42px);font-weight:900;line-height:1.1;color:var(--white);margin-bottom:12px}
+h2 em{font-style:italic;color:var(--teal-l)}
+.section-lead{font-size:16px;color:var(--muted);max-width:580px;margin-bottom:40px;line-height:1.65}
+
+/* T1 INCLUDED BAND */
+.t1-band{background:var(--gold-dim);border:1px solid rgba(212,168,50,.2);padding:20px 24px;margin-bottom:24px;display:flex;align-items:center;gap:16px}
+.t1-band-icon{font-size:24px;flex-shrink:0}
+.t1-band-text{font-size:13px;color:var(--off);line-height:1.55}
+.t1-band-text strong{color:var(--gold)}
+
+/* NEW MODULES */
+.modules{display:flex;flex-direction:column;gap:3px}
+.mod-item{background:var(--card);border:1px solid var(--border);display:grid;grid-template-columns:52px 1fr;gap:0;transition:border-color .15s}
+.mod-item:hover{border-color:rgba(42,144,128,.3)}
+.mod-num-col{background:var(--deep);border-right:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-family:'Fraunces',serif;font-size:14px;font-weight:900;color:var(--teal-l)}
+.mod-body{padding:16px 20px}
+.mod-title{font-size:14px;font-weight:700;color:var(--white);margin-bottom:4px}
+.mod-desc{font-size:12px;color:var(--muted);line-height:1.55}
+.mod-solves{display:inline-block;background:var(--teal-dim);color:var(--teal-l);font-size:9px;font-weight:700;letter-spacing:.15em;text-transform:uppercase;padding:2px 8px;margin-top:6px}
+.mod-item.new-mod{border-left:2px solid var(--teal)}
+
+/* CALLS */
+.calls-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:3px;margin-top:16px}
+.call-card{background:var(--card);border:1px solid var(--border);padding:20px;text-align:center}
+.call-num{font-family:'Fraunces',serif;font-size:32px;font-weight:900;color:var(--teal-l);line-height:1;margin-bottom:4px}
+.call-title{font-size:13px;font-weight:700;color:var(--white);margin-bottom:4px}
+.call-desc{font-size:11px;color:var(--muted);line-height:1.5}
+
+/* COMPARISON */
+.compare{display:grid;grid-template-columns:1fr 1fr;gap:3px;margin-top:16px}
+.compare-card{background:var(--card);border:1px solid var(--border);padding:22px}
+.compare-card.t1{border-top:2px solid rgba(212,168,50,.4)}
+.compare-card.t2{border-top:2px solid var(--teal)}
+.compare-label{font-size:9px;font-weight:700;letter-spacing:.25em;text-transform:uppercase;margin-bottom:10px}
+.compare-card.t1 .compare-label{color:rgba(212,168,50,.6)}
+.compare-card.t2 .compare-label{color:var(--teal-l)}
+.compare-list{list-style:none}
+.compare-list li{font-size:12px;color:var(--off);padding:5px 0;border-bottom:1px solid var(--border);display:flex;gap:8px;line-height:1.4}
+.compare-list li:last-child{border-bottom:none}
+.compare-card.t2 .compare-list li::before{content:'◆';color:var(--teal-l);font-size:9px;flex-shrink:0;margin-top:3px}
+.compare-card.t1 .compare-list li::before{content:'✓';color:rgba(212,168,50,.5);flex-shrink:0}
+
+/* GUARANTEE */
+.guarantee{background:var(--card);border:1px solid rgba(192,64,64,.3);border-top:2px solid var(--red);padding:32px;margin:20px 0}
+.g-label{font-size:9px;font-weight:700;letter-spacing:.3em;text-transform:uppercase;color:var(--red);margin-bottom:10px}
+.g-title{font-family:'Fraunces',serif;font-size:22px;font-weight:700;color:var(--white);margin-bottom:8px}
+.g-desc{font-size:14px;color:var(--muted);line-height:1.7;max-width:580px}
+
+.proof-box{background:var(--card);border:1px solid var(--border);border-left:3px solid var(--teal);padding:24px 28px;margin:16px 0}
+.proof-quote{font-family:'Fraunces',serif;font-size:18px;font-style:italic;color:var(--white);line-height:1.45;margin-bottom:12px}
+.proof-attr{font-size:12px;color:var(--muted)}
+.proof-attr strong{color:var(--teal-l)}
+
+.cta-section{background:var(--card);border:1px solid var(--border);border-top:2px solid var(--teal);padding:48px 40px;text-align:center}
+.cta-btn{display:inline-flex;align-items:center;gap:10px;background:var(--teal);color:var(--black);font-family:'Syne',sans-serif;font-size:12px;font-weight:800;letter-spacing:.2em;text-transform:uppercase;padding:16px 40px;cursor:pointer;border:none;text-decoration:none;transition:all .15s;margin-bottom:8px}
+.cta-btn:hover{background:var(--teal-l);transform:translateY(-2px)}
+.cta-note{font-size:12px;color:var(--muted);margin-top:12px}
+.cta-note a{color:var(--teal-l);text-decoration:none}
+
+.faqs{display:flex;flex-direction:column;gap:3px;margin-top:16px}
+.faq{background:var(--card);border:1px solid var(--border);overflow:hidden}
+.faq-q{padding:16px 20px;font-size:14px;font-weight:700;color:var(--white);cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:12px}
+.faq-q:hover{color:var(--teal-l)}
+.faq-icon{color:var(--teal-l);font-size:18px;flex-shrink:0;transition:transform .2s}
+.faq.open .faq-icon{transform:rotate(45deg)}
+.faq-a{display:none;padding:14px 20px 16px;font-size:13px;color:var(--muted);line-height:1.7;border-top:1px solid var(--border)}
+.faq.open .faq-a{display:block}
+
+@media(max-width:640px){
+  .topbar{padding:12px 18px}.hero{padding:60px 20px 48px}.wrap{padding:0 18px}
+  .compare{grid-template-columns:1fr}.calls-grid{grid-template-columns:1fr 1fr}
+  .mod-item{grid-template-columns:44px 1fr}
+}
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="tb-brand">The Profitable Retail System<span>™</span></div>
+  <div class="tb-tier">Tier 2 — Growth</div>
+</div>
+
+<div class="hero">
+  <div class="hero-tier">Tier 2 · 12-Week Coached Program</div>
+  <div class="tier1-badge">Requires Tier 1 Completion</div>
+  <h1>The Profitable<br><em>Operator™</em></h1>
+  <p class="hero-sub">Turn your import foundation into a fully systemised, scalable retail business — with demand forecasting, margin protection, sales conversion, and a lean cost structure.</p>
+  <div class="hero-price-wrap">
+    <div class="hero-price">GH₵ 9,500</div>
+    <div class="hero-price-note">Payment plans available · 3 months coaching support</div>
+  </div>
+  <div class="hero-stats">
+    <div class="hs-item"><div class="hs-num">7</div><div class="hs-label">New Modules</div></div>
+    <div class="hs-item"><div class="hs-num">6</div><div class="hs-label">Live Group Calls</div></div>
+    <div class="hs-item"><div class="hs-num">20+</div><div class="hs-label">Problems Solved</div></div>
+    <div class="hs-item"><div class="hs-num">15%+</div><div class="hs-label">Margin Improvement Guaranteed</div></div>
+  </div>
+</div>
+
+<!-- WHAT'S INCLUDED -->
+<div class="wrap">
+<section>
+  <div class="eyebrow">What's Included</div>
+  <h2>Everything in Tier 1 <em>Plus 7 New Modules</em></h2>
+  <p class="section-lead">Tier 2 assumes your Tier 1 systems are working. It then builds the operational, sales, and scaling layer on top of that foundation.</p>
+
+  <div class="t1-band">
+    <div class="t1-band-icon">📦</div>
+    <div class="t1-band-text"><strong>All 8 Tier 1 Modules included</strong> — sourcing, payments, discount access, storage, shipping, customs, currency risk, and cash flow. If you've already completed Tier 1, these serve as your permanent reference.</div>
+  </div>
+
+  <div class="modules">
+    <div class="mod-item new-mod"><div class="mod-num-col">09</div><div class="mod-body"><div class="mod-title">Scaling Your Logistics Network</div><div class="mod-desc">Add a second buyer, build storage infrastructure that scales with volume, and establish a backup shipper — so your business never stops because one person is unavailable.</div><span class="mod-solves">NEW — Resilient multi-node logistics</span></div></div>
+    <div class="mod-item new-mod"><div class="mod-num-col">10</div><div class="mod-body"><div class="mod-title">Demand Forecasting & Bestseller Inventory System</div><div class="mod-desc">The 4-column tracking system, the Bestseller Buying Formula, and the 5 customer intelligence habits that replace gut-feel buying with data-driven decisions.</div><span class="mod-solves">NEW — Buy what sells, stop buying what doesn't</span></div></div>
+    <div class="mod-item new-mod"><div class="mod-num-col">11</div><div class="mod-body"><div class="mod-title">Margin Protection Pricing Strategy</div><div class="mod-desc">Category-based multipliers, tiered customer pricing, the full 4-layer margin protection stack, and the only 4 promotions worth running without destroying your margins.</div><span class="mod-solves">NEW — 15–25% blended margin improvement</span></div></div>
+    <div class="mod-item new-mod"><div class="mod-num-col">12</div><div class="mod-body"><div class="mod-title">Sales Conversion Mastery</div><div class="mod-desc">The WhatsApp sales architecture, DM conversion scripts, the Instagram/TikTok content that actually converts in the Ghana market, and the 4-step in-store approach.</div><span class="mod-solves">NEW — Consistent, predictable sales flow</span></div></div>
+    <div class="mod-item new-mod"><div class="mod-num-col">13</div><div class="mod-body"><div class="mod-title">Dead Stock Liquidation — 6 Strategies</div><div class="mod-desc">The 90-day rule, 6 ranked recovery strategies from flash sales to gift-with-purchase, and the dead stock prevention system for future buying trips.</div><span class="mod-solves">NEW — Recover capital from stagnant inventory</span></div></div>
+    <div class="mod-item new-mod"><div class="mod-num-col">14</div><div class="mod-body"><div class="mod-title">Reducing Rent Dependency</div><div class="mod-desc">Calculate your real rent burden, evaluate the 3 hybrid retail models (home-based, shared space, pop-up), and reduce your biggest fixed cost without losing customers.</div><span class="mod-solves">NEW — GH₵ 36,000+ annual savings potential</span></div></div>
+    <div class="mod-item new-mod"><div class="mod-num-col">15</div><div class="mod-body"><div class="mod-title">Building a Reliable Last-Mile Delivery System</div><div class="mod-desc">Vet and train personal riders, build a delivery experience standard, and convert one-time buyers into repeat customers through the post-delivery follow-up system.</div><span class="mod-solves">NEW — Repeat purchase rate from 28% to 61%</span></div></div>
+  </div>
+</section>
+</div>
+
+<hr class="sec-rule">
+
+<!-- GROUP CALLS -->
+<div class="wrap">
+<section>
+  <div class="eyebrow">Live Coaching</div>
+  <h2>6 Group Coaching <em>Calls Included</em></h2>
+  <p class="section-lead">Bi-weekly live sessions where you bring real numbers, real challenges, and real questions. Not generic advice — specific guidance on your actual business situation.</p>
+  <div class="calls-grid">
+    <div class="call-card"><div class="call-num">1</div><div class="call-title">Weeks 1–2</div><div class="call-desc">Baseline audit, identify your biggest leaks, set your 12-week improvement targets</div></div>
+    <div class="call-card"><div class="call-num">2</div><div class="call-title">Weeks 3–4</div><div class="call-desc">Logistics network review, second buyer onboarding, storage upgrade planning</div></div>
+    <div class="call-card"><div class="call-num">3</div><div class="call-title">Weeks 5–6</div><div class="call-desc">Demand data review, buying formula calibration, next buying trip planning</div></div>
+    <div class="call-card"><div class="call-num">4</div><div class="call-title">Weeks 7–8</div><div class="call-desc">Pricing audit, margin protection stack check, promotion strategy review</div></div>
+    <div class="call-card"><div class="call-num">5</div><div class="call-title">Weeks 9–10</div><div class="call-desc">Sales conversion review, WhatsApp system audit, dead stock assessment</div></div>
+    <div class="call-card"><div class="call-num">6</div><div class="call-title">Weeks 11–12</div><div class="call-desc">Final margin check vs baseline, guarantee review, Tier 3 / continuity planning</div></div>
+  </div>
+</section>
+</div>
+
+<hr class="sec-rule">
+
+<!-- TIER COMPARISON -->
+<div class="wrap">
+<section>
+  <div class="eyebrow">Tier 1 vs Tier 2</div>
+  <h2>What's the <em>Difference?</em></h2>
+  <p class="section-lead">Tier 1 gives you the infrastructure. Tier 2 gives you the engine that makes the infrastructure generate maximum profit.</p>
+  <div class="compare">
+    <div class="compare-card t1">
+      <div class="compare-label">Tier 1 — The Import Blueprint</div>
+      <ul class="compare-list">
+        <li>Find & vet US/UK buyers</li>
+        <li>Solve the payment card problem</li>
+        <li>Map discount sources & buying calendar</li>
+        <li>Set up pre-shipment storage</li>
+        <li>Optimise shipping costs</li>
+        <li>Navigate Ghana customs</li>
+        <li>Protect margins from cedi movement</li>
+        <li>Build pre-order cash flow system</li>
+      </ul>
+    </div>
+    <div class="compare-card t2">
+      <div class="compare-label">Tier 2 — The Profitable Operator (adds)</div>
+      <ul class="compare-list">
+        <li>Scale to multi-buyer logistics network</li>
+        <li>Data-driven buying with bestseller formula</li>
+        <li>Category-based pricing architecture</li>
+        <li>WhatsApp & social sales conversion system</li>
+        <li>6-strategy dead stock liquidation</li>
+        <li>Hybrid retail model to reduce rent</li>
+        <li>Last-mile delivery experience system</li>
+        <li>6 live group coaching calls</li>
+      </ul>
+    </div>
+  </div>
+</section>
+</div>
+
+<hr class="sec-rule">
+
+<!-- GUARANTEE -->
+<div class="wrap">
+<section>
+  <div class="eyebrow">The Guarantee</div>
+  <h2>The 15% <em>Margin Improvement Promise</em></h2>
+  <div class="guarantee">
+    <div class="g-label">🛡 The Margin Improvement Guarantee</div>
+    <div class="g-title">If Your Margins Don't Improve — We Keep Working</div>
+    <div class="g-desc">Complete the 12-week program. If your gross margin per shipment hasn't improved by at least 15% compared to your baseline (recorded at enrolment), we will continue coaching you 1-on-1 at no extra cost until it does — or issue a full refund. This guarantee requires active participation in all 6 group calls and completion of all module assignments.</div>
+  </div>
+  <div class="proof-box" style="margin-top:24px">
+    <div class="proof-quote">"The systems in Tier 2 are what took me from a functioning import operation to a business that runs predictably. Demand forecasting alone changed how I spend capital. I stopped buying what I liked and started buying what the data said would sell."</div>
+    <div class="proof-attr">— <strong>Kwabena A.</strong>, Founder · The Profitable Retail System™ · Co-founder Boundaries Couture & Boundaries Monsieur</div>
+  </div>
+</section>
+</div>
+
+<hr class="sec-rule">
+
+<!-- FAQ -->
+<div class="wrap">
+<section>
+  <div class="eyebrow">Questions</div>
+  <h2>Before You <em>Enrol</em></h2>
+  <div class="faqs">
+    <div class="faq"><div class="faq-q">Do I have to complete Tier 1 first?<span class="faq-icon">+</span></div><div class="faq-a">Yes. Tier 2 builds directly on the Tier 1 systems. If you enrol without Tier 1 completed, the module content assumes you already have sourcing, payments, shipping, and currency protection working. We strongly recommend completing and implementing Tier 1 before starting Tier 2.</div></div>
+    <div class="faq"><div class="faq-q">How are the group coaching calls held?<span class="faq-icon">+</span></div><div class="faq-a">Via WhatsApp Group call or Zoom — we confirm the format with each cohort. Calls are 60–90 minutes, bi-weekly, and recordings are shared after each session for those who can't attend live.</div></div>
+    <div class="faq"><div class="faq-q">Can I pay in instalments?<span class="faq-icon">+</span></div><div class="faq-a">Yes — payment plans are available. Message us on WhatsApp to discuss the options. We typically offer a 2-instalment plan at GH₵ 5,000 now and GH₵ 5,000 after week 4.</div></div>
+    <div class="faq"><div class="faq-q">What's the difference between Tier 2 and Tier 3?<span class="faq-icon">+</span></div><div class="faq-a">Tier 2 is a group coaching program with 7 new modules and 6 live calls. Tier 3 is a 6-month done-with-you partnership — individual, limited to 5 clients per cohort, with monthly 1-on-1 strategy sessions, a full business audit, direct introductions to sourcing partners, and access to group buying. Tier 3 is for operators ready to scale to the next level with hands-on support.</div></div>
+    <div class="faq"><div class="faq-q">How do I pay?<span class="faq-icon">+</span></div><div class="faq-a">Mobile Money is our primary payment method — MTN MoMo, Vodafone Cash, and AirtelTigo Money all accepted. Message us on WhatsApp and we'll send payment details and confirm your enrolment.</div></div>
+  </div>
+</section>
+</div>
+
+<!-- CTA -->
+<div class="wrap" style="padding-bottom:80px">
+  <div class="cta-section">
+    <h2>Ready to <em>Scale?</em></h2>
+    <p>Message us on WhatsApp to enrol in the next Tier 2 cohort. Limited seats per cohort to maintain coaching quality.</p>
+    <a class="cta-btn" href="https://wa.me/15517750655?text=Hi%2C%20I%27d%20like%20to%20enrol%20in%20The%20Profitable%20Operator%20%E2%80%94%20Tier%202" target="_blank">Apply via WhatsApp — GH₵ 9,500 →</a>
+    <div class="cta-note">Pay via Mobile Money · Payment plans available · <a href="#">Complete Tier 1 first</a></div>
+  </div>
+</div>
+
+<script>
+document.querySelectorAll('.faq-q').forEach(q=>{
+  q.addEventListener('click',()=>q.parentElement.classList.toggle('open'));
+});
+</script>
+</body>
+</html>
